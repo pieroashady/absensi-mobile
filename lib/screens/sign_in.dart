@@ -1,8 +1,8 @@
-import 'package:absensi_mobile/controllers/auth.controller.dart';
-import 'package:absensi_mobile/models/request/login_request.dart';
-import 'package:absensi_mobile/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../controllers/auth.controller.dart';
+import '../models/request/login_request.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);

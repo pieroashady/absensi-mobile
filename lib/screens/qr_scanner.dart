@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import '../controllers/absen_siswa_controller.dart';
-import '../models/request/absen_siswa_request.dart';
 
 class QRViewExample extends StatefulWidget {
   const QRViewExample({Key? key, required this.absenType}) : super(key: key);
