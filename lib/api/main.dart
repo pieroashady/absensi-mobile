@@ -1,3 +1,4 @@
+import 'package:absensi_mobile/utils/app_utils.dart';
 import 'package:dio/dio.dart';
 
 import '../utils/app_config.dart';
@@ -14,9 +15,14 @@ class Api {
   factory Api() => _singleton;
 
   static Dio createDio() {
-    var dio = Dio(BaseOptions(
-      baseUrl: AppConfig.baseUrl,
-    ));
+    var token = AppUtils.getToken();
+
+    var dio = Dio(
+      BaseOptions(
+        baseUrl: AppConfig.baseUrl,
+        headers: {'Authorization': 'Bearer $token'},
+      ),
+    );
 
     dio.interceptors.addAll({
       AppInterceptors(dio),

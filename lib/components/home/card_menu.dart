@@ -11,9 +11,9 @@ class CardMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      elevation: 5,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: InkWell(
         onTap: onTap,
@@ -25,7 +25,10 @@ class CardMenu extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(menuTitle),
+              Text(
+                menuTitle,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
             ],
           ),
         ),

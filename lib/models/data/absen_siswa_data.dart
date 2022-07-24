@@ -1,3 +1,5 @@
+import 'siswa_data.dart';
+
 class AbsenSiswaData {
   int? id;
   int? siswaId;
@@ -7,6 +9,7 @@ class AbsenSiswaData {
   String? keterangan;
   String? createdAt;
   String? updatedAt;
+  Siswa? siswa;
 
   AbsenSiswaData(
       {this.id,
@@ -16,7 +19,8 @@ class AbsenSiswaData {
       this.jamKeluar,
       this.keterangan,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.siswa});
 
   AbsenSiswaData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -27,6 +31,7 @@ class AbsenSiswaData {
     keterangan = json['keterangan'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    siswa = json['siswa'] != null ? Siswa.fromJson(json['siswa']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -39,6 +44,9 @@ class AbsenSiswaData {
     data['keterangan'] = keterangan;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    if (siswa != null) {
+      data['siswa'] = siswa!.toJson();
+    }
     return data;
   }
 }

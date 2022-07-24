@@ -14,7 +14,7 @@ class AppInterceptors extends Interceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    print(err.message);
+    print(err);
     print('from dio');
     return super.onError(err, handler);
   }

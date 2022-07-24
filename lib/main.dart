@@ -1,19 +1,25 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'app_theme.dart';
-import 'screens/home.dart';
+import 'initialize_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await GetStorage.init();
+  Widget screen = await initializeScreen();
+  runApp(MyApp(
+    screen: screen,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({
+    Key? key,
+    required this.screen,
+  }) : super(key: key);
+
+  final Widget screen;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         textTheme: AppTheme.textTheme,
       ),
-      home: const MyHomePage(),
+      home: screen,
     );
   }
 }

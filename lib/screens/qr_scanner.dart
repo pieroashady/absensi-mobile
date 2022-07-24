@@ -10,15 +10,15 @@ import '../controllers/absen_siswa_controller.dart';
 import '../models/request/absen_siswa_request.dart';
 
 class QRViewExample extends StatefulWidget {
-  const QRViewExample({Key? key}) : super(key: key);
+  const QRViewExample({Key? key, required this.absenType}) : super(key: key);
+  final String absenType;
 
   @override
   State<StatefulWidget> createState() => _QRViewExampleState();
 }
 
 class _QRViewExampleState extends State<QRViewExample> {
-  final AbsenSiswaController _absenSiswaController =
-      Get.put(AbsenSiswaController());
+  final _absenSiswaController = Get.put(AbsenSiswaController());
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -146,9 +146,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     });
     controller.scannedDataStream.listen((scanData) async {
       await controller.stopCamera();
-      var data =
-          AbsenSiswaRequest(siswaId: 3, tipe: 'keluar', code: scanData.code);
-      await _absenSiswaController.handleAbsen(data);
+      await _absenSiswaController.handleAbsen(scanData.code!, widget.absenType);
       setState(() {
         result = scanData;
       });
