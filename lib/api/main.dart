@@ -15,13 +15,8 @@ class Api {
   factory Api() => _singleton;
 
   static Dio createDio() {
-    var token = AppUtils.getToken();
-
     var dio = Dio(
-      BaseOptions(
-        baseUrl: AppConfig.baseUrl,
-        headers: {'Authorization': 'Bearer $token'},
-      ),
+      BaseOptions(baseUrl: AppConfig.baseUrl),
     );
 
     dio.interceptors.addAll({

@@ -1,3 +1,4 @@
+import 'package:absensi_mobile/components/rekap/rekap.dart';
 import 'package:absensi_mobile/screens/profile_screen.dart';
 import 'package:absensi_mobile/screens/rekap_absen_list.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class Menu extends StatelessWidget {
               Expanded(
                 child: CardMenu(
                   onTap: () {
-                    Get.to(const RekapAbsenList());
+                    Get.to(const RekapSiswa());
                   },
                   icon: Icons.calendar_month,
                   menuTitle: 'Rekap Kehadiran',

@@ -11,7 +11,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userC = Get.put(UserController());
-    userC.setUser();
 
     return Scaffold(
       body: Obx(

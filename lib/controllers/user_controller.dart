@@ -6,14 +6,22 @@ class UserController extends GetxController {
   var user = User().obs;
   var loading = false.obs;
 
+  @override
+  void onInit() {
+    setUser();
+    super.onInit();
+  }
+
   setLoading(value) {
     loading.value = value;
   }
 
   setUser() async {
+    print('trigger');
     setLoading(true);
     try {
       var response = await UserService().getCurrentUser();
+      print(response.toJson());
       user.value = response;
       user.refresh();
       setLoading(false);

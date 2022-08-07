@@ -19,8 +19,10 @@ class AuthController extends GetxController {
 
   Future<void> handleLogout() async {
     final box = GetStorage();
-    await box.erase();
-    Get.deleteAll();
+
+    await box.remove("user");
+    await box.remove("token");
+    await Get.deleteAll();
     Get.offAll(const SignIn());
   }
 
@@ -30,6 +32,8 @@ class AuthController extends GetxController {
 
       var user = jsonEncode(response.data);
       var accessToken = response.data!.token;
+
+      print(accessToken);
 
       final box = GetStorage();
       await box.write('user', user);
