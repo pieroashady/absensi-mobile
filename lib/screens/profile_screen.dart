@@ -1,4 +1,5 @@
 import 'package:absensi_mobile/components/profile/user_profile.dart';
+import 'package:absensi_mobile/utils/app_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,8 +22,9 @@ class ProfileScreen extends StatelessWidget {
             : Column(
                 children: <Widget>[
                   ProfileHeader(
-                    avatar: userC.getUser().siswa!.fotoSiswa == null
-                        ? NetworkImage(userC.getUser().siswa!.fotoSiswa!)
+                    avatar: userC.getUser().siswa!.fotoSiswa != null
+                        ? NetworkImage(
+                            "${AppConfig.basePath}/storage/images/${userC.getUser().siswa!.fotoSiswa!}")
                         : const AssetImage("assets/images/default_profile.jpg")
                             as ImageProvider,
                     coverImage: const AssetImage("assets/images/image1.png"),

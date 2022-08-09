@@ -1,10 +1,14 @@
+import 'package:absensi_mobile/controllers/rekap_absen_siswa.controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RekapSiswa extends StatelessWidget {
   const RekapSiswa({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final rekapC = Get.put(RekapAbsenController());
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -12,10 +16,10 @@ class RekapSiswa extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).padding.top,
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Center(
+            const Center(
               child: Text(
                 'REKAP',
                 style: TextStyle(
@@ -24,7 +28,7 @@ class RekapSiswa extends StatelessWidget {
                 ),
               ),
             ),
-            Center(
+            const Center(
               child: Text(
                 'KEHADIRAN',
                 style: TextStyle(
@@ -33,32 +37,41 @@ class RekapSiswa extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
+              height: 40,
+            ),
+            Obx(
+              () => rekapC.loading.value
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(10.0),
+                          ),
+                          border: Border.all(color: Colors.red)),
+                      child: Column(
+                        children: [
+                          _detailBox('Sakit',
+                              ': ${rekapC.getRekap().data!.totalSakit}'),
+                          _detailBox(
+                              'Ijin', ': ${rekapC.getRekap().data!.totalIzin}'),
+                          _detailBox(
+                              'Alfa', ': ${rekapC.getRekap().data!.totalAlpa}'),
+                        ],
+                      ),
+                    ),
+            ),
+            const SizedBox(
               height: 40,
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
-                  ),
-                  border: Border.all(color: Colors.red)),
-              child: Column(
-                children: [
-                  _detailBox('Sakit', ': 2'),
-                  _detailBox('Ijin', ': 1'),
-                  _detailBox('Alfa', ': 0'),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
+                  borderRadius: const BorderRadius.all(
+                    const Radius.circular(10.0),
                   ),
                   border: Border.all(color: Colors.red)),
               child: Column(
@@ -85,11 +98,11 @@ class RekapSiswa extends StatelessWidget {
                 width: 100,
                 child: Text(
                   desc,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(width: 50),
-              Text(result, style: TextStyle(fontWeight: FontWeight.bold))
+              const SizedBox(width: 50),
+              Text(result, style: const TextStyle(fontWeight: FontWeight.bold))
             ],
           ),
         ),
@@ -109,14 +122,16 @@ class RekapSiswa extends StatelessWidget {
               Container(
                 child: Text(
                   desc,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 12),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Text(result,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12))
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 12))
             ],
           ),
         ),

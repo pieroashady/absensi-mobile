@@ -28,6 +28,7 @@ class AuthController extends GetxController {
 
   Future<void> handleLogin(LoginRequest loginRequest) async {
     try {
+      print('trigger');
       var response = await AuthService().login(loginRequest);
 
       var user = jsonEncode(response.data);
@@ -41,6 +42,7 @@ class AuthController extends GetxController {
 
       Get.off(const MyHomePage());
     } catch (e) {
+      print(e);
       if (e is DioError) {
         if (e.response?.data != null) {
           setErrorAndMessage(true, e.response!.data['message']);
