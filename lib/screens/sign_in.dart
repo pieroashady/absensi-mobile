@@ -95,33 +95,40 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: MaterialButton(
-                      onPressed: () async {
-                        try {
-                          var data = LoginRequest(
-                              username: usernameController.text,
-                              password: passwordController.text);
-                          await authController.handleLogin(data);
-                        } catch (_) {}
-                      },
-                      color: const Color(0xffff2d55),
-                      elevation: 0,
-                      minWidth: 400,
-                      height: 50,
-                      textColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ), //since this is only a UI app
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Obx(
+                        () => MaterialButton(
+                          onPressed: () async {
+                            if (authController.loading.value) {
+                              return;
+                            }
+
+                            try {
+                              var data = LoginRequest(
+                                  username: usernameController.text,
+                                  password: passwordController.text);
+                              await authController.handleLogin(data);
+                            } catch (_) {}
+                          },
+                          color: const Color(0xffff2d55),
+                          elevation: 0,
+                          minWidth: 400,
+                          height: 50,
+                          textColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ), //since this is only a UI app
+                          child: authController.loading.value
+                              ? const CircularProgressIndicator()
+                              : const Text(
+                                  'Login',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ),
-                      ),
-                    ),
-                  ),
+                      )),
                 ],
               ),
             ),

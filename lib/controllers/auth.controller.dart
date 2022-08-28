@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class AuthController extends GetxController {
+  var loading = false.obs;
   var error = false.obs;
   var message = ''.obs;
 
@@ -27,6 +28,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> handleLogin(LoginRequest loginRequest) async {
+    loading.value = true;
     try {
       print('trigger');
       var response = await AuthService().login(loginRequest);
@@ -41,7 +43,10 @@ class AuthController extends GetxController {
       await box.write('token', accessToken);
 
       Get.off(const MyHomePage());
+      loading.value = false;
     } catch (e) {
+      loading.value = false;
+
       print(e);
       if (e is DioError) {
         if (e.response?.data != null) {

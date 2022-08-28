@@ -4,12 +4,15 @@ import '../models/response/rekap_absen_response.dart';
 import '../services/rekap_absen_siswa.service.dart';
 
 class RekapAbsenController extends GetxController {
+  var mapelId = "";
   var rekap = RekapAbsenResponse().obs;
   var loading = false.obs;
 
+  RekapAbsenController(this.mapelId);
+
   @override
   void onInit() {
-    setRekapAbsen();
+    setRekapAbsen(mapelId);
     super.onInit();
   }
 
@@ -17,10 +20,10 @@ class RekapAbsenController extends GetxController {
     loading.value = value;
   }
 
-  setRekapAbsen() async {
+  setRekapAbsen(var mapelId) async {
     setLoading(true);
     try {
-      var response = await RekapAbsenSiswaService().find();
+      var response = await RekapAbsenSiswaService().find(mapelId);
       rekap.value = response;
       rekap.refresh();
       setLoading(false);

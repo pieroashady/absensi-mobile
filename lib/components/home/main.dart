@@ -1,3 +1,4 @@
+import 'package:absensi_mobile/components/mapel/mapel_list.dart';
 import 'package:absensi_mobile/components/rekap/rekap.dart';
 import 'package:absensi_mobile/screens/profile_screen.dart';
 import 'package:absensi_mobile/screens/rekap_absen_list.dart';
@@ -32,20 +33,20 @@ class Menu extends StatelessWidget {
                   menuTitle: 'Absen Masuk',
                 ),
               ),
-              const SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: CardMenu(
-                  onTap: () {
-                    Get.to(const QRViewExample(
-                      absenType: 'keluar',
-                    ));
-                  },
-                  icon: Icons.subdirectory_arrow_left,
-                  menuTitle: 'Absen Keluar',
-                ),
-              ),
+              // const SizedBox(
+              //   width: 10,
+              // ),
+              // Expanded(
+              //   child: CardMenu(
+              //     onTap: () {
+              //       Get.to(const QRViewExample(
+              //         absenType: 'keluar',
+              //       ));
+              //     },
+              //     icon: Icons.subdirectory_arrow_left,
+              //     menuTitle: 'Absen Keluar',
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -56,7 +57,7 @@ class Menu extends StatelessWidget {
               Expanded(
                 child: CardMenu(
                   onTap: () {
-                    Get.to(const RekapSiswa());
+                    Get.to(const MapelList());
                   },
                   icon: Icons.calendar_month,
                   menuTitle: 'Rekap Kehadiran',
