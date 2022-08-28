@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -9,8 +8,11 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../controllers/absen_siswa_controller.dart';
 
 class QRViewExample extends StatefulWidget {
-  const QRViewExample({Key? key, required this.absenType}) : super(key: key);
+  const QRViewExample(
+      {Key? key, required this.absenType, required this.mapelId})
+      : super(key: key);
   final String absenType;
+  final int mapelId;
 
   @override
   State<StatefulWidget> createState() => _QRViewExampleState();
@@ -22,11 +24,10 @@ class _QRViewExampleState extends State<QRViewExample> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
-  // In order to get hot reload to work we need to pause the camera if the platform
-  // is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
+    Get.snackbar(widget.mapelId.toString(), "oke");
     if (Platform.isAndroid) {
       controller!.pauseCamera();
     }
@@ -68,7 +69,11 @@ class _QRViewExampleState extends State<QRViewExample> {
     });
     controller.scannedDataStream.listen((scanData) async {
       await controller.stopCamera();
-      await _absenSiswaController.handleAbsen(scanData.code!, widget.absenType);
+      await _absenSiswaController.handleAbsen(
+        scanData.code!,
+        widget.absenType,
+        widget.mapelId,
+      );
       setState(() {
         result = scanData;
       });

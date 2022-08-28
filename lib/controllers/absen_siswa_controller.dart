@@ -29,7 +29,7 @@ class AbsenSiswaController extends GetxController {
     }
   }
 
-  Future<void> handleAbsen(String code, String type) async {
+  Future<void> handleAbsen(String code, String type, int mapelId) async {
     var user = AppUtils.getUser();
 
     try {

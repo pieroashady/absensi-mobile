@@ -25,9 +25,7 @@ class Menu extends StatelessWidget {
               Expanded(
                 child: CardMenu(
                   onTap: () {
-                    Get.to(const QRViewExample(
-                      absenType: 'masuk',
-                    ));
+                    Get.to(const MapelList(from: "absen"));
                   },
                   icon: Icons.subdirectory_arrow_right,
                   menuTitle: 'Absen Masuk',
@@ -57,7 +55,7 @@ class Menu extends StatelessWidget {
               Expanded(
                 child: CardMenu(
                   onTap: () {
-                    Get.to(const MapelList());
+                    Get.to(const MapelList(from: "rekap"));
                   },
                   icon: Icons.calendar_month,
                   menuTitle: 'Rekap Kehadiran',

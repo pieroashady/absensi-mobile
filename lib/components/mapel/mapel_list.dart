@@ -1,3 +1,4 @@
+import 'package:absensi_mobile/screens/qr_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,7 +7,8 @@ import '../../models/data/mata_pelajaran_data.dart';
 import '../rekap/rekap.dart';
 
 class MapelList extends StatelessWidget {
-  const MapelList({Key? key}) : super(key: key);
+  const MapelList({Key? key, required this.from}) : super(key: key);
+  final String from;
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +54,17 @@ class MapelList extends StatelessWidget {
       elevation: 4.0,
       highlightElevation: 1.0,
       onPressed: () {
-        Get.to(RekapSiswa(
-          mapelData: mataPelajaranData,
+        if (from == 'rekap') {
+          Get.to(RekapSiswa(
+            mapelData: mataPelajaranData,
+          ));
+          return;
+        }
+        Get.to(QRViewExample(
+          absenType: "masuk",
+          mapelId: mataPelajaranData.id!,
         ));
+        return;
       },
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
